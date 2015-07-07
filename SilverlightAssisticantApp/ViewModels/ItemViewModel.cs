@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SilverlightAssisticantApp.Models;
+using System.Windows.Input;
+using Assisticant;
 
 namespace SilverlightAssisticantApp.ViewModels
 {
@@ -16,8 +18,32 @@ namespace SilverlightAssisticantApp.ViewModels
 
         public string Name
         {
-            get { return _item.Name; }
-            set { _item.Name = value; }
+            get { return _item.FoodName; }
+            set { _item.FoodName = value; }
+        }
+
+        public string FoodDescription
+        {
+            get { return _item.FoodDescription; }
+            set { _item.FoodDescription = value; }
+        }
+
+        public decimal FoodPrice
+        {
+            get { return _item.FoodPrice; }
+            set { _item.FoodPrice = value; }
+        }
+
+        public ICommand OrderCommand
+        {
+            get
+            {
+                return MakeCommand
+                   .Do(delegate
+                   {
+                       //place order logic
+                   });
+            }
         }
 
         public override bool Equals(object obj)

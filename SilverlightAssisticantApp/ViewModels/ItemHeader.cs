@@ -20,7 +20,7 @@ namespace SilverlightAssisticantApp.ViewModels
 
         public string Name
         {
-            get { return _item.Name ?? "<New Item>"; }
+            get { return _item.FoodName ?? "<Blank Item>"; }
         }
 
         public override bool Equals(object obj)

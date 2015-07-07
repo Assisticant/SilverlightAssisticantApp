@@ -11,13 +11,15 @@ namespace SilverlightAssisticantApp.ViewModels
 {
     public class MainViewModel
     {
+        private readonly Menu _menu;
+        private readonly Selection _selection;
         private readonly Document _document;
-		private readonly Selection _selection;
 
-        public MainViewModel(Document document, Selection selection)
+
+
+        public MainViewModel(Menu menu)
         {
-            _document = document;
-			_selection = selection;
+            _menu = menu;
         }
 
         public IEnumerable<ItemHeader> Items
@@ -27,6 +29,68 @@ namespace SilverlightAssisticantApp.ViewModels
                 return
                     from item in _document.Items
                     select new ItemHeader(item);
+            }
+        }
+
+        public DateTime CurrentMenuDate
+        {
+            get
+            {
+                return _menu.MenuDate == DateTime.MinValue ? DateTime.Today : _menu.MenuDate;
+            }
+            set
+            {
+                _menu.UpdateMenuDate(value);
+            }
+        }
+
+        public IEnumerable<ItemViewModel> AllSoups
+        {
+            get
+            {
+                return from item in _menu.CurrentItems
+                       where item.ItemDate == _menu.MenuDate && item.FoodCategory == FoodCategory.Soup
+                       select new ItemViewModel(item);
+            }
+        }
+
+        public IEnumerable<ItemViewModel> AllMains
+        {
+            get
+            {
+                return from item in _menu.CurrentItems
+                       where item.ItemDate == _menu.MenuDate && item.FoodCategory == FoodCategory.MainMeal
+                       select new ItemViewModel(item);
+            }
+        }
+
+        public IEnumerable<ItemViewModel> AllSandwiches
+        {
+            get
+            {
+                return from item in _menu.CurrentItems
+                       where item.ItemDate == _menu.MenuDate && item.FoodCategory == FoodCategory.Sandwich
+                       select new ItemViewModel(item);
+            }
+        }
+
+        public IEnumerable<ItemViewModel> AllSushi
+        {
+            get
+            {
+                return from item in _menu.CurrentItems
+                       where item.ItemDate == _menu.MenuDate && item.FoodCategory == FoodCategory.Sushi
+                       select new ItemViewModel(item);
+            }
+        }
+
+        public IEnumerable<ItemViewModel> AllJackets
+        {
+            get
+            {
+                return from item in _menu.CurrentItems
+                       where item.ItemDate == _menu.MenuDate && item.FoodCategory == FoodCategory.Jacket
+                       select new ItemViewModel(item);
             }
         }
 

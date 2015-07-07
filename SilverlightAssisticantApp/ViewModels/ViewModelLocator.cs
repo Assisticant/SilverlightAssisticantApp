@@ -11,56 +11,57 @@ namespace SilverlightAssisticantApp.ViewModels
 {
     public class ViewModelLocator : ViewModelLocatorBase
     {
-        private Document _document;
-		private Selection _selection;
+        private Menu _menu;
 
         public ViewModelLocator()
         {
-			if (DesignMode)
-				_document = LoadDesignModeDocument();
-			else
-				_document = LoadDocument();
-			_selection = new Selection();
+            if (DesignMode)
+                _menu = LoadDesignModeMenu();
+            else
+                _menu = LoadMenu();
+
+
+            for (int i = 0; i < 100; i++)
+            {
+                PopulateTestData(DateTime.Today.AddDays(i));
+            }
+
+        }
+
+        private void PopulateTestData(DateTime date)
+        {
+            _menu.AddFoodItem("Soup 1", "Soup Description " + date.ToShortDateString(), 1.5m, FoodCategory.Soup, date);
+            _menu.AddFoodItem("Soup 2", "Soup Description 2" + date.ToShortDateString(), 2m, FoodCategory.Soup, date);
+            _menu.AddFoodItem("Main Meal 1", "Main Description 1" + date.ToShortDateString(), 2m, FoodCategory.MainMeal, date);
+            _menu.AddFoodItem("Main Meal 2", "Main Description 2" + date.ToShortDateString(), 2m, FoodCategory.MainMeal, date);
+            _menu.AddFoodItem("Sushi 1", "Sushi Description 1" + date.ToShortDateString(), 6m, FoodCategory.Sushi, date);
+            _menu.AddFoodItem("Sushi 2", "Sushi Description 2" + date.ToShortDateString(), 5m, FoodCategory.Sushi, date);
+        }
+
+        private Menu LoadMenu()
+        {
+            return new Menu(DateTime.Today);
+        }
+
+        private Menu LoadDesignModeMenu()
+        {
+            return new Menu(DateTime.Today);
         }
 
         public object Main
         {
-            get { return ViewModel(() => new MainViewModel(_document, _selection)); }
+            get { return ViewModel(() => new MainViewModel(_menu)); }
         }
 
-		public object Item
-		{
-			get
-			{
-				return ViewModel(() => _selection.SelectedItem == null
-					? null
-					: new ItemViewModel(_selection.SelectedItem));
-			}
-		}
+        //public object Item
+        //{
+        //    get
+        //    {
+        //        return ViewModel(() => _selection.SelectedItem == null
+        //            ? null
+        //            : new ItemViewModel(_selection.SelectedItem));
+        //    }
+        //}
 
-		private Document LoadDocument()
-		{
-			// TODO: Load your document here.
-            Document document = new Document();
-            var one = document.NewItem();
-            one.Name = "One";
-            var two = document.NewItem();
-            two.Name = "Two";
-            var three = document.NewItem();
-            three.Name = "Three";
-            return document;
-		}
-
-		private Document LoadDesignModeDocument()
-		{
-            Document document = new Document();
-            var one = document.NewItem();
-            one.Name = "Design";
-            var two = document.NewItem();
-            two.Name = "Mode";
-            var three = document.NewItem();
-            three.Name = "Data";
-            return document;
-		}
     }
 }
