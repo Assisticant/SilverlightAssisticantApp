@@ -60,11 +60,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assisticant">
-      <HintPath>..\packages\Assisticant.1.1.4.1\lib\sl5\Assisticant.dll</HintPath>
+    <Reference Include="Assisticant, Version=2.3.0.0, Culture=neutral, PublicKeyToken=19e83a8289e31a8f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Assisticant.1.1.4.2\lib\sl5\Assisticant.dll</HintPath>
     </Reference>
-    <Reference Include="Assisticant.XAML">
-      <HintPath>..\packages\Assisticant.1.1.4.1\lib\sl5\Assisticant.XAML.dll</HintPath>
+    <Reference Include="Assisticant.XAML, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Assisticant.1.1.4.2\lib\sl5\Assisticant.XAML.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System.Windows" />
